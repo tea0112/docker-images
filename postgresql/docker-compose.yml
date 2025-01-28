@@ -1,10 +1,10 @@
 services:
   db:
-    container_name: pg_test
+    container_name: postgresql-database
     image: postgres:17-bookworm
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: Root!23456
-      POSTGRES_DB: test_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Postgres!23456
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
