@@ -1,0 +1,34 @@
+services:
+  mysql:
+    image: mysql:9
+    container_name: legal-counsel-mysql
+    cap_add:
+      - ALL
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=legal_counsel
+      - MYSQL_USER=admin # This is the user phpMyAdmin should use
+      - MYSQL_PASSWORD=legal_counsel123456 # This is the password for the 'admin' user
+      - MYSQL_ROOT_PASSWORD=root_user123!@#
+    ports:
+      - '4406:3306'
+    hostname: legal-counsel-mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    environment:
+      - PMA_HOST=legal-counsel-mysql # Correct: service name
+      - PMA_PORT=3306 # <<< CHANGE THIS to the internal MySQL port
+      - PMA_USER=admin # <<< CHANGE THIS to match MYSQL_USER from the mysql service
+      - PMA_PASSWORD=legal_counsel123456 # <<< Ensure this matches MYSQL_PASSWORD
+      # - MYSQL_ROOT_PASSWORD=root_user123!@# # You can keep this if you want to be able to log in as root from phpMyAdmin, but it's not strictly necessary for the 'admin' user.
+    ports:
+      - '8080:80'
+    hostname: legal-counsel-phpmyadmin
+    container_name: legal-counsel-phpmyadmin
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
