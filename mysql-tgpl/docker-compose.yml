@@ -24,7 +24,7 @@ services:
       - PMA_PASSWORD=legal_counsel123456 # <<< Ensure this matches MYSQL_PASSWORD
       # - MYSQL_ROOT_PASSWORD=root_user123!@# # You can keep this if you want to be able to log in as root from phpMyAdmin, but it's not strictly necessary for the 'admin' user.
     ports:
-      - '8080:80'
+      - '2223:80'
     hostname: legal-counsel-phpmyadmin
     container_name: legal-counsel-phpmyadmin
     depends_on:
